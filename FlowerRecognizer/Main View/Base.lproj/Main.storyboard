@@ -17,17 +17,32 @@
                         <rect key="frame" x="0.0" y="0.0" width="393" height="852"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="V7J-eN-8gd">
+                            <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" translatesAutoresizingMaskIntoConstraints="NO" id="aHU-0o-237">
                                 <rect key="frame" x="0.0" y="172" width="393" height="612"/>
-                            </imageView>
+                                <subviews>
+                                    <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="V7J-eN-8gd">
+                                        <rect key="frame" x="0.0" y="0.0" width="393" height="428.33333333333331"/>
+                                    </imageView>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="center" lineBreakMode="clip" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="yKO-TG-myq">
+                                        <rect key="frame" x="0.0" y="428.33333333333343" width="393" height="183.66666666666669"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="18"/>
+                                        <nil key="textColor"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                </subviews>
+                                <constraints>
+                                    <constraint firstItem="yKO-TG-myq" firstAttribute="height" secondItem="aHU-0o-237" secondAttribute="height" multiplier="0.3" id="7Cq-Eo-gVJ"/>
+                                    <constraint firstItem="V7J-eN-8gd" firstAttribute="height" secondItem="aHU-0o-237" secondAttribute="height" multiplier="0.7" id="NLZ-MQ-GZO"/>
+                                </constraints>
+                            </stackView>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="6Tk-OE-BBY"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                         <constraints>
-                            <constraint firstItem="V7J-eN-8gd" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" id="8Hj-WA-n3f"/>
-                            <constraint firstItem="V7J-eN-8gd" firstAttribute="bottom" secondItem="6Tk-OE-BBY" secondAttribute="bottom" id="A9U-ZW-hNg"/>
-                            <constraint firstItem="V7J-eN-8gd" firstAttribute="top" secondItem="6Tk-OE-BBY" secondAttribute="top" id="a5c-E9-YSV"/>
-                            <constraint firstItem="V7J-eN-8gd" firstAttribute="trailing" secondItem="6Tk-OE-BBY" secondAttribute="trailing" id="foa-sK-ovC"/>
+                            <constraint firstItem="aHU-0o-237" firstAttribute="trailing" secondItem="6Tk-OE-BBY" secondAttribute="trailing" id="CyT-ah-sLk"/>
+                            <constraint firstItem="aHU-0o-237" firstAttribute="bottom" secondItem="6Tk-OE-BBY" secondAttribute="bottom" id="FCF-fJ-F5T"/>
+                            <constraint firstItem="aHU-0o-237" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" id="b1C-jZ-Z0P"/>
+                            <constraint firstItem="aHU-0o-237" firstAttribute="top" secondItem="6Tk-OE-BBY" secondAttribute="top" id="puu-8P-cfp"/>
                         </constraints>
                     </view>
                     <navigationItem key="navigationItem" id="yXs-7T-fwi">
@@ -39,6 +54,7 @@
                     </navigationItem>
                     <connections>
                         <outlet property="imageView" destination="V7J-eN-8gd" id="PXa-lf-X4W"/>
+                        <outlet property="predictionLabel" destination="yKO-TG-myq" id="Nym-O9-N58"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
