@@ -30,7 +30,6 @@ class ViewController: UIViewController, UIImagePickerControllerDelegate, UINavig
         imagePicker.dismiss(animated: true)
     }
 
-
     @IBAction func onCameraTapped(_ sender: UIBarButtonItem) {
         present(imagePicker, animated: true)
     }
