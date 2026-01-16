@@ -14,7 +14,7 @@
 		A8D28D502F18E8BC00866452 /* Exceptions for "FlowerRecognizer" folder in "FlowerRecognizer" target */ = {
 			isa = PBXFileSystemSynchronizedBuildFileExceptionSet;
 			membershipExceptions = (
-				App/Info.plist,
+				Info.plist,
 			);
 			target = A8D28D3D2F18E8BA00866452 /* FlowerRecognizer */;
 		};
