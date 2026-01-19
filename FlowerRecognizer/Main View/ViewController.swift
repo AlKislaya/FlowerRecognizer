@@ -8,40 +8,52 @@
 import UIKit
 
 class ViewController: UIViewController {
+    @IBOutlet weak var titleLabel: UILabel!
     @IBOutlet weak var predictionLabel: UILabel!
     @IBOutlet weak var imageView: UIImageView!
     
     let flowersAnalyzer = FlowersAnalyzer()
+    let wikiArticleService = WikiArticleService()
     
     func onUserPickedImage(_ image: UIImage) {
-        updateImageView(image)
-        updatePrediction("Making predictions for the photo...")
+        updateImageView(with: image)
+        updatePrediction(with: Constants.analyzingPhoto)
+        updateTitle(with: "")
         
         do {
             try flowersAnalyzer.analyze(for: image, completionHandler: onImageAnalyzed)
         } catch {
-            updatePrediction("Smth went wrong")
+            print(error)
+            showErrorLabels()
         }
     }
     
     func onImageAnalyzed(category: String?, error: Error?) {
-        if let error = error {
-            updatePrediction(error.localizedDescription)
+        guard let category = category, category != "" else {
+            if let error = error {
+                print(error)
+            }
+            showErrorLabels()
             return
         }
         
-        updatePrediction(category ?? "Smth went wrong")
-    }
-    
-    func updateImageView(_ image: UIImage) {
-        DispatchQueue.main.async {
-            self.imageView.image = image
-        }
-    }
-    
-    func updatePrediction(_ text: String) {
-        DispatchQueue.main.async {
-            self.predictionLabel.text = text
+        updateTitle(with: category)
+        
+        Task.detached {
+            do {
+                let (result, wikiError) = try await self.wikiArticleService.fetchArticle(title: category)
+                if let article = result {
+                    await self.updatePrediction(with: article)
+                } else {
+                    if let wikiError = wikiError {
+                        print(wikiError)
+                    }
+                    await self.updatePrediction(with: Constants.smthWentWrong)
+                }
+            } catch {
+                print(error)
+                await self.updatePrediction(with: Constants.smthWentWrong)
+            }
         }
     }
 
