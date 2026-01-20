@@ -48,14 +48,12 @@ class ViewController: UIViewController {
         
         Task.detached {
             do {
-                let (result, wikiError) = try await self.wikiArticleService.fetchArticle(title: category)
-                if let article = result {
-                    await self.updatePrediction(with: article)
-                } else {
-                    if let wikiError = wikiError {
-                        print(wikiError)
-                    }
-                    await self.updatePrediction(with: Constants.smthWentWrong)
+                let result = try await self.wikiArticleService.fetchArticle(title: category)
+                
+                await self.updatePrediction(with: result.article ?? Constants.smthWentWrong)
+                
+                if let image = result.image {
+                    await self.appendImagesCollection(with: image)
                 }
             } catch {
                 print(error)
