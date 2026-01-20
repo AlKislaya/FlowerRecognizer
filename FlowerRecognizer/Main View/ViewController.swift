@@ -10,13 +10,20 @@ import UIKit
 class ViewController: UIViewController {
     @IBOutlet weak var titleLabel: UILabel!
     @IBOutlet weak var predictionLabel: UILabel!
-    @IBOutlet weak var imageView: UIImageView!
+    @IBOutlet weak var imagesCollectionView: UICollectionView!
+    
+     var images = [UIImage()] {
+        didSet {
+            imagesCollectionView.reloadData()
+        }
+    }
     
     let flowersAnalyzer = FlowersAnalyzer()
     let wikiArticleService = WikiArticleService()
     
     func onUserPickedImage(_ image: UIImage) {
-        updateImageView(with: image)
+        clearImagesCollection()
+        appendImagesCollection(with: image)
         updatePrediction(with: Constants.analyzingPhoto)
         updateTitle(with: "")
         
